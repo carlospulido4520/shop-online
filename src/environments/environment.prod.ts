@@ -1,5 +1,5 @@
 export const environment = {
-  firebase: {
+  firebaseConfig: {
     projectId: 'shoponline-8af05',
     appId: '1:147342162066:web:5fd97386867f3a69bece4b',
     databaseURL: 'https://shoponline-8af05-default-rtdb.firebaseio.com',
