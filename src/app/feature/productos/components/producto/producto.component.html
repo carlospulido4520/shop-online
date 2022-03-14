@@ -1,0 +1,156 @@
+<div class="card shadow p-3">
+  <div>
+    <h1>Crear/Editar Productos</h1>
+    <hr class="m-0" />
+  </div>
+  <div class="card-body">
+    <form class="row" [formGroup]="productoForm">
+      <div class="col-lg-4 mb-2">
+        <label> Nombre</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Nombre"
+          formControlName="nombre"
+        />
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('nombre')?.errors?.required &&
+            productoForm.get('nombre')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label> Código</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Código"
+          formControlName="codigo"
+        />
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('codigo')?.errors?.required &&
+            productoForm.get('codigo')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label> Categoría</label>
+        <select class="form-select w-100" formControlName="categoria">
+          <option [value]="null">Seleccione una opción</option>
+          <option value="Ropa">Ropa</option>
+          <option value="Calzado">Calzado</option>
+          <option value="Oriflame">Oriflame</option>
+        </select>
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('categoria')?.errors?.required &&
+            productoForm.get('categoria')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label> Sub Categoría</label>
+        <select class="form-select w-100" formControlName="subcategoria">
+          <option [value]="null">Seleccione una opción</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('subcategoria')?.errors?.required &&
+            productoForm.get('subcategoria')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label> Precio</label>
+        <input
+          class="form-control"
+          type="number"
+          placeholder="Precio"
+          formControlName="precio"
+        />
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('precio')?.errors?.required &&
+            productoForm.get('precio')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+
+      <div class="col-lg-4 mb-2">
+        <label>Imagen</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Imagen"
+          formControlName="imagen"
+        />
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('imagen')?.errors?.required &&
+            productoForm.get('imagen')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+      <div class="col-lg-4 mb-2">
+        <label> Información</label>
+        <textarea
+          class="form-control"
+          aria-label="With textarea"
+          formControlName="informacion"
+        ></textarea>
+        <span
+          class="fiel_error"
+          *ngIf="
+            productoForm.get('informacion')?.errors?.required &&
+            productoForm.get('informacion')?.touched
+          "
+        >
+          Campo requrido
+        </span>
+      </div>
+    </form>
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="text-end">
+          <button
+            type="button"
+            class="btn btn-danger mr-3"
+            [routerLink]="['inicio']"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="guardarProducto()"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

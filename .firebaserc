@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "shoponline-8af05"
+  },
+  "targets": {
+    "shoponline-8af05": {
+      "hosting": {
+        "shopOnline": [
+          "shoponline-8af05"
+        ]
+      }
+    }
+  }
+}

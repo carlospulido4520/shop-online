@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "shopOnline:build:production",
+            "firebaseProject": "shoponline-8af05",
+            "firebaseHostingSite": "shoponline-8af05"
+          }
         }
       }
     }
