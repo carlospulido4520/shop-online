@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit {
 
   existeUsuario: boolean = false;
   nombreUsuario: string = '';
+  mostrarPanel = false;
 
   constructor(
     private authService: AuthService
@@ -27,7 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   validarUsuario() {
-    const user = localStorage.getItem('user');
+    const user = sessionStorage.getItem('user');
     if (user) {
       this.existeUsuario = true;
       this.nombreUsuario = JSON.parse(user).email;
@@ -38,7 +39,7 @@ export class NavbarComponent implements OnInit {
 
   async logout() {
     await this.authService.logout();
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     this.existeUsuario = false;
 
   }

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
+    if (sessionStorage.getItem('user')) {
       this.router.navigate(['inicio']);
     }
   }

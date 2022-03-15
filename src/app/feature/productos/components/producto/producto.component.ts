@@ -17,6 +17,28 @@ export class ProductoComponent implements OnInit {
   archivo: any[] = [];
   cargando = false;
 
+
+  public categorias = [
+    {
+      nombre: 'Ropa',
+      subcategoria:
+        [
+          'Para hombre', 'Para mujer', 'Para niños'
+        ]
+    },
+    {
+      nombre: 'Calzado',
+      subcategoria:
+        [
+          'Para hombre', 'Para mujer', 'Para niños'
+        ]
+    },
+    { nombre: 'Oriflame', subcategoria: null }
+  ];
+
+  public subCategorias: any = [];
+
+
   upLoadPercent: Observable<number | undefined>;
   urlImage: Observable<string>;
 
@@ -30,6 +52,7 @@ export class ProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.productoService.getProductos();
+    this.validarSubcategoria();
   }
 
   guardarProducto() {
@@ -65,6 +88,15 @@ export class ProductoComponent implements OnInit {
 
   borrarArchivo() {
     this.archivo = [];
+  }
+
+  validarSubcategoria() {
+    this.productoForm.get('categoria')?.valueChanges.subscribe(
+      res => {
+        const categoria = this.categorias.find(x => x.nombre === res);
+        this.subCategorias = categoria?.subcategoria;
+      }
+    )
   }
 
 }

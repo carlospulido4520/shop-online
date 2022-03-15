@@ -1,23 +1,8 @@
 <div class="container">
   <header
-    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+    class="d-flex flex-wrap justify-content-md-between py-3 mb-4 border-bottom"
   >
-    <a
-      href="/"
-      class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
-    >
-      <svg
-        class="bi me-2"
-        width="40"
-        height="32"
-        role="img"
-        aria-label="Bootstrap"
-      >
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-    </a>
-
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <ul class="nav col-12 col-md-auto mb-2 mb-md-0">
       <li>
         <a [routerLink]="['inicio']" class="nav-link px-2 link-secondary"
           >Inicio</a
@@ -30,9 +15,29 @@
           >Productos</a
         >
       </li>
+      <li *ngIf="existeUsuario">
+        <a
+          [routerLink]="['productos/crear']"
+          class="nav-link px-2 link-secondary"
+          >Crear</a
+        >
+      </li>
     </ul>
-
-    <div class="col-md-4 text-end">
+    <!-- <div class="carrito">
+      <button
+        type="button"
+        class="btn btn-primary position-relative"
+        (click)="mostrarPanel = !mostrarPanel"
+      >
+        Productos agregados
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          0
+        </span>
+      </button>
+    </div> -->
+    <div class="text-end">
       <ng-container *ngIf="existeUsuario; else noUsuario">
         <div class="row">
           <div class="col-lg-6 align-self-center">
@@ -60,4 +65,9 @@
       </ng-template>
     </div>
   </header>
+</div>
+
+<div class="container_panel card shadow-sm" *ngIf="mostrarPanel">
+  <h4>Productos en tu carrito</h4>
+  <hr class="mt-0" />
 </div>
