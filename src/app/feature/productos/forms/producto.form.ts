@@ -17,9 +17,7 @@ export class ProductoForm {
             precio: [null, {
                 validators: [Validators.required, Validators.nullValidator]
             }],
-            imagen: [null, {
-                validators: [Validators.required, Validators.nullValidator]
-            }],
+            imagen: [null],
             informacion: ['', {
                 validators: [Validators.required, Validators.nullValidator]
             }],

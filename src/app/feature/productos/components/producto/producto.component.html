@@ -97,24 +97,6 @@
       </div>
 
       <div class="col-lg-4 mb-2">
-        <label>Imagen</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Imagen"
-          formControlName="imagen"
-        />
-        <span
-          class="fiel_error"
-          *ngIf="
-            productoForm.get('imagen')?.errors?.required &&
-            productoForm.get('imagen')?.touched
-          "
-        >
-          Campo requrido
-        </span>
-      </div>
-      <div class="col-lg-4 mb-2">
         <label> Información</label>
         <textarea
           class="form-control"
@@ -131,6 +113,47 @@
           Campo requrido
         </span>
       </div>
+      <div class="col-lg-4 mb-2 imagen">
+        <div class="alert alert-secondary" role="alert">
+          <div class="border_container_interno">
+            <ng-container *ngIf="archivo.length > 0; else elseTemplate">
+              <div class="row">
+                <div class="col-lg-12" *ngFor="let item of archivo; index as i">
+                  <div class="card archivo" (click)="borrarArchivo()">
+                    <div class="card-body">
+                      <div class="info_tarjeta">
+                        {{ item.name }}
+                        <i class="fa-solid fa-trash-can"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              No tienes archivos agregados
+            </ng-template>
+          </div>
+        </div>
+
+        <input
+          type="file"
+          class="file-input"
+          (change)="onArchivoSeleccionado($event)"
+          accept=".png, .jpg"
+          #subirArchivo
+        />
+        <input
+          style="display: none"
+          #imageUser
+          type="text"
+          [value]="urlImage | async"
+        />
+
+        <button class="btn btn-primary" (click)="subirArchivo.click()">
+          Seleccionar archivos
+        </button>
+      </div>
     </form>
     <div class="row mt-2">
       <div class="col-lg-12">
@@ -145,6 +168,7 @@
           <button
             type="button"
             class="btn btn-primary"
+            [disabled]="cargando"
             (click)="guardarProducto()"
           >
             Guardar

@@ -1,0 +1,20 @@
+.file-input {
+  display: none;
+}
+
+.border_container_interno {
+  border: gray 1px dashed;
+  height: 100%;
+  padding: 10px;
+}
+
+.info_tarjeta {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.archivo :hover {
+  cursor: pointer;
+}

@@ -14,6 +14,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,9 +28,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AuthModule,
     ProductosModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AngularFireDatabaseModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
