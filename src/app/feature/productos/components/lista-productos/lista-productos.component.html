@@ -13,7 +13,7 @@
       <div class="spinner-border" role="status"></div>
     </div>
     <div class="row mt-4" *ngIf="categoria">
-      <div class="col-lg-4" *ngFor="let producto of productosMostrar">
+      <div class="col-lg-4 mb-2" *ngFor="let producto of productosMostrar">
         <div class="card shadow" style="height: 30rem">
           <div style="width: 100%; height: 50%">
             <ngb-carousel style="width: 100%; height: 100%">
@@ -32,7 +32,7 @@
             </ngb-carousel>
           </div>
 
-          <div class="card-body">
+          <div class="card-body info_scroll">
             <h5 class="card-title">
               {{ producto.nombre }}
               <span>{{ producto.precio | currency }}</span>

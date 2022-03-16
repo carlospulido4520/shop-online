@@ -47,3 +47,17 @@
   color: red;
   font-size: 12px;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar:hover {
+  opacity: 1;
+}
+
+:hover::-webkit-scrollbar-thumb {
+  background-color: #9e9e9e !important;
+}
