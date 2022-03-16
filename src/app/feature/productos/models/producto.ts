@@ -5,6 +5,7 @@ export interface Producto {
     codigo: string;
     subcategoria: string;
     precio: string;
-    imagen: string;
+    imagenes: any[];
     informacion: string;
+    estado: string;
 }

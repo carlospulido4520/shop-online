@@ -27,11 +27,19 @@ export class ListaProductosComponent implements OnInit {
     this.spinner = true;
     this.productoService.getProductos().snapshotChanges().subscribe(
       (response: any) => {
-        this.productos = response.map((element: any) => {
+        const productos = response.map((element: any) => {
           let dataFireBase = element.payload.toJSON();
           dataFireBase['id'] = element.key;
           return dataFireBase as Producto
         });
+        this.productos = productos.map((producto: Producto) => {
+          return {
+            ...producto,
+            imagenes: Object.values(producto.imagenes)
+          }
+        });
+        this.spinner = false;
+      }, error => {
         this.spinner = false;
       }
     );

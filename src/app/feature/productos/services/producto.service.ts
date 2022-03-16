@@ -27,8 +27,9 @@ export class ProductoService {
       codigo: product.codigo,
       subcategoria: product.subcategoria,
       precio: product.precio,
-      imagen: product.imagen,
+      imagenes: product.imagenes,
       informacion: product.informacion,
+      estado: product.estado
     })
   }
 

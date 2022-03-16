@@ -6,6 +6,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { ProductoComponent } from './components/producto/producto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltrosProductosComponent } from './components/filtros-productos/filtros-productos.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FiltrosProductosComponent } from './components/filtros-productos/filtro
     CommonModule,
     ProductosRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbCarouselModule
   ]
 })
 export class ProductosModule { }

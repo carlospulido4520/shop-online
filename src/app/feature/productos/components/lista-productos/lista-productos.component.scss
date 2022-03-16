@@ -8,3 +8,9 @@
   width: 5rem;
   height: 5rem;
 }
+
+::ng-deep {
+  .carousel-inner{
+    height: 100% !important;
+  }
+}
