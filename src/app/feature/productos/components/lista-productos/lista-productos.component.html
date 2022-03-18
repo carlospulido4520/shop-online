@@ -16,7 +16,11 @@
       <div class="col-lg-4 mb-2" *ngFor="let producto of productosMostrar">
         <div class="card shadow" style="height: 30rem">
           <div style="width: 100%; height: 50%">
-            <ngb-carousel style="width: 100%; height: 100%">
+            <ngb-carousel
+              style="width: 100%; height: 100%; cursor: pointer"
+              [interval]="0"
+              (click)="open(content, producto?.imagenes)"
+            >
               <ng-template ngbSlide *ngFor="let item of producto?.imagenes">
                 <div
                   class="picsum-img-wrapper"
@@ -44,7 +48,13 @@
             {{ producto.categoria }} - {{ producto.subcategoria }}
           </div>
           <div class="card-footer bg-transparent text-center">
-            <a class="btn btn-primary">Agregar al carrito</a>
+            <a class="btn btn-primary mr-2">Agregar al carrito</a>
+            <a
+              class="btn btn-warning"
+              (click)="editar(producto)"
+              *ngIf="mostrarEditar"
+              >Editar</a
+            >
           </div>
         </div>
       </div>
@@ -54,7 +64,7 @@
           *ngIf="!spinner && productosMostrar.length === 0"
           role="alert"
         >
-          Ningún registro encontrado
+          Ningún producto encontrado con filtro seleccionado
         </div>
       </div>
     </div>
@@ -85,3 +95,40 @@
     </div> -->
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Imagenes</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <ngb-carousel
+      style="width: 100%;"
+      [interval]="0"
+    >
+      <ng-template ngbSlide *ngFor="let item of imagenesSeleccionada">
+        <div class="picsum-img-wrapper" style="width: 100%; height: 100%">
+          <img
+            style="width: 100%; height: 100%; object-fit: cover"
+            [src]="item.url"
+            alt="Random first slide"
+          />
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      Salir
+    </button>
+  </div>
+</ng-template>

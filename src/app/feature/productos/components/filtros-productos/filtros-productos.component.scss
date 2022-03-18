@@ -1,21 +1,71 @@
-.info_tarjeta {
-  margin: 0px;
+.advanced-searcher {
+  position: absolute;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: -5px 2px 12px 2px rgba(0, 0, 0, 0.2);
+  z-index: 9;
+  width: 430px;
+  right: 0;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+
+  &__searcher {
+    border-bottom: 1px solid lightgray;
+    padding-top: 8px;
+
+    &-title {
+      padding-bottom: 8px;
+    }
+  }
+
+  .close-container {
+    padding-top: 8px;
+    .close-icon {
+      color: #ccc;
+      cursor: pointer;
+    }
+  }
+}
+
+.panel-manager-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  margin: 8px 0;
 }
 
-.nombre-tarjeta {
-  padding: 10px !important;
+.button-container {
+  padding: 16px;
+  text-align: center;
+
+  .action-button {
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 10px;
+    padding-top: 0;
+  }
 }
 
-.vuelo :hover {
-  cursor: pointer;
+.btn {
+  font-size: 12px;
 }
 
-.seccionNavegacion {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+@media (max-width: 430px) {
+  .advanced-searcher {
+    width: 250px;
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
+}
+
+.badge {
+  padding: 5px 15px;
+  font-size: 15px !important;
+  font-weight: 0 !important;
+  font-weight: 300;
+  background-color: #bec8d1 !important;
+  border-radius: 50px;
+  margin-right: 0.5rem !important ;
 }

@@ -1,37 +1,70 @@
-<div class="row mt-0">
-  <div class="col-lg-4" *ngFor="let item of categorias">
-    <div
-      class="card vuelo"
-      [ngStyle]="{
-        'background-color': existe(item) ? '#008eaa' : 'white',
-        color: existe(item) ? 'white' : ''
-      }"
-      (click)="guardarCategoria(item)"
-    >
-      <div class="card-body nombre-tarjeta">
-        <div class="info_tarjeta">
-          {{ item.nombre }}
-        </div>
+<section class="panel-manager-container">
+  <div class="chip-list">
+    <ng-container>
+      <span
+        class="badge bg-secondary"
+        *ngFor="let item of filtrosSeleccionados"
+      >
+        {{ item }}
+      </span>
+    </ng-container>
+  </div>
+  <button (click)="visible = !visible" class="btn btn-primary open-button">
+    Abrir filtros
+  </button>
+</section>
+
+<section class="advanced-searcher container" [hidden]="!visible">
+  <div class="row">
+    <div class="offset-sm-11 col-sm-1 close-container">
+      <i class="pi pi-times close-icon" (click)="closePanel()"></i>
+    </div>
+    <div class="col-md-12 advanced-searcher__searcher">
+      <div class="advanced-searcher__searcher-title">
+        <span> Filtrar información </span>
       </div>
     </div>
-  </div>
-</div>
-<hr>
-<div class="row mt-0">
-  <div class="col-lg-4" *ngFor="let item of subCategorias">
-    <div
-      class="card vuelo"
-      [ngStyle]="{
-        'background-color': existeSubcategoria(item) ? '#008eaa' : 'white',
-        color: existeSubcategoria(item) ? 'white' : ''
-      }"
-      (click)="guardarSubCategoria(item)"
-    >
-      <div class="card-body nombre-tarjeta">
-        <div class="info_tarjeta">
-          {{ item }}
-        </div>
+    <form [formGroup]="formFiltros" class="row mb-4 p-3">
+      <div class="col-lg-12">
+        <label> Categoría</label>
+        <select class="form-select w-100" formControlName="categoria">
+          <option [value]="null">Seleccione una opción</option>
+          <option
+            [value]="categoria.nombre"
+            *ngFor="let categoria of categorias"
+          >
+            {{ categoria.nombre }}
+          </option>
+        </select>
       </div>
+
+      <div class="col-lg-12 mt-2">
+        <label> Subcategoría</label>
+        <select class="form-select w-100" formControlName="subcategoria">
+          <option [value]="null">Seleccione una opción</option>
+          <option [value]="categoria" *ngFor="let categoria of subCategorias">
+            {{ categoria }}
+          </option>
+        </select>
+      </div>
+    </form>
+    <div class="col-md-6 button-container">
+      <button
+        (click)="buscar(); visible = !visible"
+        style="width: 100%"
+        class="btn btn-primary"
+      >
+        Aplicar
+      </button>
+    </div>
+    <div class="col-md-6 button-container">
+      <button
+        (click)="limpiarFiltros()"
+        style="width: 100%"
+        class="btn btn-secondary"
+      >
+        Limpiar filtros
+      </button>
     </div>
   </div>
-</div>
+</section>

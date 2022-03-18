@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 
@@ -13,14 +14,20 @@ export class ListaProductosComponent implements OnInit {
   public spinner = false;
   public categoria: any;
   public productosMostrar: Producto[] = [];
-
+  public mostrarEditar = false;
+  public imagenesSeleccionada: any[] = [];
 
   constructor(
     private productoService: ProductoService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
     this.consultarProductos();
+    if (sessionStorage.getItem('user')) {
+      this.mostrarEditar = true;
+    }
+
   }
 
   consultarProductos() {
@@ -56,6 +63,17 @@ export class ListaProductosComponent implements OnInit {
         this.productosMostrar = subcategoria;
       }
     }
+  }
+
+  editar(id: any) {
+
+  }
+
+  open(content: any, imagenes: any) {
+    this.imagenesSeleccionada = imagenes;
+    this.modalService.open(content,
+      { centered: true }
+    )
   }
 
 

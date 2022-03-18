@@ -5,6 +5,7 @@ import { ProductoForm } from '../../forms/producto.form';
 import { ProductoService } from '../../services/producto.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
+import { CATEGORIAS } from '../../utils/categorias';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -12,29 +13,12 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProductoComponent implements OnInit {
 
-  productoForm: FormGroup = new ProductoForm().FormProducto();
-  archivos: any[] = [];
-  cargando = false;
-  public categorias = [
-    {
-      nombre: 'Ropa',
-      subcategoria:
-        [
-          'Para hombre', 'Para mujer', 'Para niños'
-        ]
-    },
-    {
-      nombre: 'Calzado',
-      subcategoria:
-        [
-          'Para hombre', 'Para mujer', 'Para niños'
-        ]
-    },
-    { nombre: 'Oriflame', subcategoria: null }
-  ];
-
+  public productoForm: FormGroup = new ProductoForm().FormProducto();
+  public archivos: any[] = [];
+  public cargando = false;
+  public categorias: any = [];
   public subCategorias: any = [];
-  urlImage: string | undefined;
+  public urlImage: string | undefined;
 
   constructor(
     private productoService: ProductoService,
@@ -45,6 +29,7 @@ export class ProductoComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.categorias = CATEGORIAS;
     this.productoService.getProductos();
     this.validarSubcategoria();
   }
@@ -86,7 +71,7 @@ export class ProductoComponent implements OnInit {
   validarSubcategoria() {
     this.productoForm.get('categoria')?.valueChanges.subscribe(
       res => {
-        const categoria = this.categorias.find(x => x.nombre === res);
+        const categoria = this.categorias.find((x: any) => x.nombre === res);
         this.subCategorias = categoria?.subcategoria;
       }
     )
