@@ -9,6 +9,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class ProductoService {
 
   productos: AngularFireList<any>;
+  productoSeleccionado: Producto | null;
 
   constructor(
     private fireBase: AngularFireDatabase,
@@ -22,6 +23,19 @@ export class ProductoService {
 
   inserProduct(product: Producto) {
     this.productos.push({
+      nombre: product.nombre,
+      categoria: product.categoria,
+      codigo: product.codigo,
+      subcategoria: product.subcategoria,
+      precio: product.precio,
+      imagenes: product.imagenes,
+      informacion: product.informacion,
+      estado: product.estado
+    })
+  }
+
+  updateProduct(product: Producto) {
+    this.productos.update(product.id, {
       nombre: product.nombre,
       categoria: product.categoria,
       codigo: product.codigo,

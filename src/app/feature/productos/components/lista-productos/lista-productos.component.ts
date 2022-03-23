@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/producto.service';
@@ -19,7 +20,8 @@ export class ListaProductosComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,8 +67,12 @@ export class ListaProductosComponent implements OnInit {
     }
   }
 
-  editar(id: any) {
-
+  editar(producto: Producto) {
+    const id = producto.id;
+    this.productoService.productoSeleccionado = producto;
+    this.router.navigate(["productos/crear"], {
+      queryParams: { id }
+    });
   }
 
   open(content: any, imagenes: any) {

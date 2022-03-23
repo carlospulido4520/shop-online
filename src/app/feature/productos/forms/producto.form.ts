@@ -21,6 +21,7 @@ export class ProductoForm {
             informacion: ['', {
                 validators: [Validators.required, Validators.nullValidator]
             }],
+            estado: [null]
         });
     }
 }

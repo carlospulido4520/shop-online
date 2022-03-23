@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ProductoForm } from '../../forms/producto.form';
@@ -6,32 +6,64 @@ import { ProductoService } from '../../services/producto.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { CATEGORIAS } from '../../utils/categorias';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.scss']
 })
-export class ProductoComponent implements OnInit {
+export class ProductoComponent implements OnInit, OnDestroy {
 
   public productoForm: FormGroup = new ProductoForm().FormProducto();
-  public archivos: any[] = [];
+  public archivos: any = [];
   public cargando = false;
   public categorias: any = [];
   public subCategorias: any = [];
   public urlImage: string | undefined;
+  public idProducto: string;
 
   constructor(
     private productoService: ProductoService,
     private toastService: ToastService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
+  ngOnDestroy(): void {
+    this.idProducto = "";
+    this.productoService.productoSeleccionado = null;
+  }
 
+  goBack() {
+    this.router.navigate(['../']);
+  }
 
   ngOnInit(): void {
     this.categorias = CATEGORIAS;
     this.productoService.getProductos();
     this.validarSubcategoria();
+    this.route.queryParams.subscribe((params) => {
+      ({ id: this.idProducto } = params);
+      if (this.idProducto) {
+        this.setValueForm();
+      }
+    });
+  }
+
+  setValueForm() {
+    const producto = this.productoService.productoSeleccionado;
+    this.archivos = producto?.imagenes;
+    this.productoForm.patchValue({
+      nombre: producto?.nombre,
+      categoria: producto?.categoria,
+      codigo: producto?.codigo,
+      subcategoria: producto?.subcategoria,
+      precio: producto?.precio,
+      imagen: '',
+      informacion: producto?.informacion,
+      estado: producto?.estado
+    });
   }
 
   guardarProducto() {
@@ -40,13 +72,18 @@ export class ProductoComponent implements OnInit {
       this.cargando = true;
       const valueForm = this.productoForm.value;
       valueForm.imagenes = this.archivos;
-      valueForm.estado = 'activo';
-      this.productoService.inserProduct(valueForm);
-      this.toastService.showSuccess('Tu producto se ha creado correctamente');
+      if (this.idProducto) {
+        valueForm.id = this.idProducto;
+        this.productoService.updateProduct(valueForm);
+        this.toastService.showSuccess('Tu producto se ha editado correctamente');
+      } else {
+        valueForm.estado = 'activo';
+        this.productoService.inserProduct(valueForm);
+        this.toastService.showSuccess('Tu producto se ha creado correctamente');
+      }
       this.productoForm.reset();
       this.archivos = [];
       this.cargando = false;
-
     }
   }
 
@@ -64,7 +101,8 @@ export class ProductoComponent implements OnInit {
     })).toPromise();
   }
 
-  borrarArchivo(index: number) {
+  borrarArchivo(index: number, url: string) {
+    this.storage.refFromURL(url).delete();
     this.archivos.splice(index, 1);
   }
 

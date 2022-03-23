@@ -6,7 +6,7 @@ import { ListaProductosComponent } from './components/lista-productos/lista-prod
 import { ProductoComponent } from './components/producto/producto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FiltrosProductosComponent } from './components/filtros-productos/filtros-productos.component';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     ProductosRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbProgressbarModule
   ]
 })
 export class ProductosModule { }
